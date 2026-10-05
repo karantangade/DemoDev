@@ -1,0 +1,602 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevSpace - Build Something Amazing</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #0b1020;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+
+        nav {
+            width: 100%;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(11, 16, 32, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #7c5cff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #d9d9e8;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #8f78ff;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            color: white;
+            background: #7c5cff;
+            transition: 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: #6244e8;
+            transform: translateY(-2px);
+        }
+
+        /* Hero */
+
+        .hero {
+            min-height: 90vh;
+            padding: 80px 8%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 15px;
+            border: 1px solid rgba(124, 92, 255, 0.5);
+            border-radius: 30px;
+            color: #a99cff;
+            margin-bottom: 20px;
+            background: rgba(124, 92, 255, 0.08);
+        }
+
+        .hero h1 {
+            font-size: clamp(45px, 6vw, 80px);
+            line-height: 1.05;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: #7c5cff;
+        }
+
+        .hero p {
+            color: #a9afc3;
+            font-size: 18px;
+            max-width: 550px;
+            margin-bottom: 35px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .primary-btn,
+        .secondary-btn {
+            padding: 14px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .primary-btn {
+            background: #7c5cff;
+            color: white;
+        }
+
+        .primary-btn:hover {
+            background: #6346e8;
+            transform: translateY(-3px);
+        }
+
+        .secondary-btn {
+            border: 1px solid #343a52;
+            color: white;
+        }
+
+        .secondary-btn:hover {
+            border-color: #7c5cff;
+            transform: translateY(-3px);
+        }
+
+        /* Hero Card */
+
+        .hero-card {
+            width: 380px;
+            min-height: 380px;
+            padding: 35px;
+            border-radius: 30px;
+            background: linear-gradient(
+                145deg,
+                rgba(124,92,255,0.2),
+                rgba(255,255,255,0.03)
+            );
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero-card h2 {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .hero-card p {
+            color: #a9afc3;
+            margin-bottom: 25px;
+        }
+
+        .code-box {
+            background: #080c18;
+            border-radius: 15px;
+            padding: 20px;
+            color: #9bffcf;
+            font-family: monospace;
+            font-size: 14px;
+        }
+
+        /* Features */
+
+        .section {
+            padding: 90px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            max-width: 650px;
+            margin: auto;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: #a9afc3;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            padding: 30px;
+            background: #11172a;
+            border: 1px solid #202740;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: #7c5cff;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+        }
+
+        .icon {
+            width: 55px;
+            height: 55px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            background: rgba(124,92,255,0.15);
+            font-size: 25px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #969db2;
+        }
+
+        /* Stats */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .stat {
+            padding: 30px;
+            background: #11172a;
+            border-radius: 18px;
+            border: 1px solid #202740;
+        }
+
+        .stat h3 {
+            font-size: 38px;
+            color: #8f78ff;
+        }
+
+        .stat p {
+            color: #969db2;
+        }
+
+        /* CTA */
+
+        .cta {
+            margin: 50px 8% 90px;
+            padding: 70px 30px;
+            text-align: center;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #6c4df6, #4932a8);
+        }
+
+        .cta h2 {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: #ddd8ff;
+        }
+
+        .cta a {
+            display: inline-block;
+            padding: 14px 28px;
+            background: white;
+            color: #5035c7;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Footer */
+
+        footer {
+            padding: 30px 8%;
+            border-top: 1px solid #202740;
+            display: flex;
+            justify-content: space-between;
+            color: #777f96;
+        }
+
+        /* Responsive */
+
+        @media (max-width: 900px) {
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 60px;
+            }
+
+            .hero-content {
+                margin: auto;
+            }
+
+            .hero p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .features {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .hero-card {
+                width: 100%;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .cta h2 {
+                font-size: 32px;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+
+    <nav>
+        <div class="logo">Dev<span>Space</span></div>
+
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <a href="#contact" class="nav-btn">Get Started</a>
+    </nav>
+
+
+    <!-- Hero -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                🚀 Build. Learn. Grow.
+            </div>
+
+            <h1>
+                Turn Your Ideas Into
+                <span>Digital Reality.</span>
+            </h1>
+
+            <p>
+                A modern platform for developers, creators and innovators
+                who want to build amazing digital experiences.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#features" class="primary-btn">
+                    Explore Features →
+                </a>
+
+                <a href="#about" class="secondary-btn">
+                    Learn More
+                </a>
+            </div>
+
+        </div>
+
+
+        <div class="hero-card">
+
+            <h2>Build Something Great.</h2>
+
+            <p>
+                Write clean code, create powerful applications
+                and turn your ideas into real products.
+            </p>
+
+            <div class="code-box">
+                &lt;developer&gt;<br>
+                &nbsp;&nbsp;create();<br>
+                &nbsp;&nbsp;learn();<br>
+                &nbsp;&nbsp;build();<br>
+                &lt;/developer&gt;
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Features -->
+
+    <section class="section" id="features">
+
+        <div class="section-title">
+
+            <h2>Everything You Need</h2>
+
+            <p>
+                Powerful features designed to help you learn,
+                build and grow as a developer.
+            </p>
+
+        </div>
+
+
+        <div class="features">
+
+            <div class="card">
+
+                <div class="icon">💻</div>
+
+                <h3>Modern Development</h3>
+
+                <p>
+                    Build responsive and beautiful websites
+                    using modern web technologies.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">⚡</div>
+
+                <h3>Fast Performance</h3>
+
+                <p>
+                    Create fast and optimized applications
+                    that provide a smooth user experience.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">🔒</div>
+
+                <h3>Secure</h3>
+
+                <p>
+                    Follow modern security practices to
+                    keep your applications safe.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Stats -->
+
+    <section class="section" id="about">
+
+        <div class="section-title">
+
+            <h2>Growing Every Day</h2>
+
+            <p>
+                Join a community of developers building
+                the future with technology.
+            </p>
+
+        </div>
+
+
+        <div class="stats">
+
+            <div class="stat">
+                <h3>10K+</h3>
+                <p>Developers</p>
+            </div>
+
+            <div class="stat">
+                <h3>500+</h3>
+                <p>Projects</p>
+            </div>
+
+            <div class="stat">
+                <h3>50+</h3>
+                <p>Technologies</p>
+            </div>
+
+            <div class="stat">
+                <h3>99%</h3>
+                <p>Satisfaction</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CTA -->
+
+    <section class="cta" id="contact">
+
+        <h2>Ready to Build?</h2>
+
+        <p>
+            Start your development journey today and
+            transform your ideas into something amazing.
+        </p>
+
+        <a href="mailto:hello@example.com">
+            Start Building →
+        </a>
+
+    </section>
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <div>
+            © 2026 DevSpace. All rights reserved.
+        </div>
+
+        <div>
+            Built with HTML & CSS ❤️
+        </div>
+
+    </footer>
+
+</body>
+</html>
+```
